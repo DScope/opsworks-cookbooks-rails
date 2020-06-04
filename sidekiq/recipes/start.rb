@@ -2,6 +2,7 @@ node[:deploy].each do |application, deploy|
   rails_env = deploy[:rails_env]
   release_path = "#{deploy[:deploy_to]}/current/"
   execute "sudo chown #{deploy[:user]} #{deploy[:deploy_to]}/shared/ -R " do
+    returns [0,1]
   end
   execute "rake sidekiq:stop" do
     cwd           release_path
@@ -17,9 +18,12 @@ node[:deploy].each do |application, deploy|
     returns [0,1]
   end
   execute "sudo chmod -R 776 #{release_path}" do
+    returns [0,1]
   end
   execute "sudo chown #{deploy[:user]} #{release_path} -R" do
+    returns [0,1]
   end
   execute "sudo chown #{deploy[:user]} #{deploy[:deploy_to]}/shared/log -R " do
+    returns [0,1]
   end
 end
