@@ -14,6 +14,7 @@ node[:deploy].each do |application, deploy|
     user "#{deploy[:user]}"
     command       "RAILS_ENV=#{rails_env} bundle exec sidekiq -d"
     cwd           release_path
+    returns [0,1]
   end
   execute "sudo chmod -R 776 #{release_path}" do
   end
