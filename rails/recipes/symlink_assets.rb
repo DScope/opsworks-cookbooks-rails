@@ -8,4 +8,13 @@ node[:deploy].each do |application, deploy|
     action :create
     recursive true
   end
+
+  directory "/var/nginx/cache" do
+    group deploy[:group]
+    owner deploy[:user]
+    mode 0775
+    returns [0,1]
+    action :create
+    recursive true
+  end
 end
