@@ -70,7 +70,7 @@ server {
     #new
   # prevent forwarding of cookies
     proxy_set_header    Cookie               "";
-
+    gzip_static on;
     # prevent passing of WP cookie back to client
     proxy_hide_header       Set-Cookie;
     proxy_hide_header       link;
